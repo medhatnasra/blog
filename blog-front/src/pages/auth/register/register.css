@@ -1,0 +1,36 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 60vh;
+}
+
+.register-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.register-form input {
+  margin: 10px 0;
+  width: 300px;
+  height: 37px;
+  padding: 10px;
+  border: 1px solid lightblue;
+}
+
+.registerbutton {
+  margin-top: 20px;
+  width: 100px;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}

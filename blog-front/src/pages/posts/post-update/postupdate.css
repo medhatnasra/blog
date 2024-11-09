@@ -1,0 +1,66 @@
+.post-update {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8); /* Black with 80% opacity */
+}
+
+.post-update-form {
+  width: 70%;
+  height: 500px;
+  background-color: #fff;
+  transform: translateY(-20px); /* Slightly off the screen for animation */
+  transition: opacity 0.4s ease, transform 1s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px;
+}
+.post-update-form .input-field {
+  margin: 20px 0;
+}
+
+.post-update-form > .input-field input {
+  width: 70%;
+  padding: 10px;
+}
+
+.submit-button-container {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.submitbutton {
+  width: 100px;
+  color: green;
+}
+
+.post-update-form .show {
+  opacity: 1;
+  transform: translateY(0); /* Brings it to its normal position */
+}
+
+.close-icon {
+  position: relative;
+  left: 97%;
+  color: white;
+  background-color: red;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.updatebutton {
+  width: 100px;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}

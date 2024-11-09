@@ -1,0 +1,32 @@
+.post {
+  color: black;
+}
+
+.post h3 {
+  margin: 15px;
+}
+
+.post-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.categories-section a {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  padding: 1px 10px;
+}
+
+.categories-section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1010px) {
+  .home-section {
+    flex-direction: column;
+  }
+}

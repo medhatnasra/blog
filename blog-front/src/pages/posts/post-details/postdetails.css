@@ -1,0 +1,134 @@
+.post-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.post-details-title {
+  font-size: clamp(20px, 8vw, 50px);
+  margin: 20px 0;
+  text-align: center;
+}
+.post-details-image {
+  min-width: 80%;
+  height: 200px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.post-details-description {
+  width: 80%;
+}
+
+.post-details a {
+  margin: 20px 0;
+  color: black;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.user-details i {
+  font-size: 30px;
+}
+
+.footer-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  width: 80%;
+}
+
+.like-section {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+.like-section i {
+  margin-right: 5px;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.like-section span {
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.post-date span {
+  font-style: italic;
+}
+
+.comments-section h1 {
+  text-align: center;
+}
+
+.pencil {
+  cursor: pointer;
+  margin: 0 10px;
+  color: #007bff;
+}
+.comment-section {
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.comment-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comment-textarea {
+  resize: vertical;
+  padding: 15px;
+  border: 1px solid var(--comment-border-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  min-height: 70px;
+  background-color: var(--comment-bg-color);
+  width: 100%;
+}
+
+.comment-submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-color);
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.5rem, 0.143rem + 0.952vw, 1rem);
+  width: 50%;
+}
+
+.comment-submit-button:hover {
+  background-color: #45a049;
+}

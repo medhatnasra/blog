@@ -1,0 +1,37 @@
+.home-container {
+  background-color: var(--main-color);
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  color: #2f4f4f;
+  margin-bottom: 20px;
+}
+
+.welcome-message {
+  font-size: 1.2rem;
+  color: #4f4f4f;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+.get-started-btn {
+  background-color: #28a745;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #218838;
+}

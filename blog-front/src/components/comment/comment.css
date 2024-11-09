@@ -1,0 +1,31 @@
+.comment-container {
+  margin: 10px 0;
+  padding: 10px;
+  width: 45vw;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+.comment-container .delete {
+  position: relative;
+  left: 90%;
+  top: 0;
+  cursor: pointer;
+  transition: ease-in-out;
+}
+.delete:hover {
+  font-size: 1.1rem;
+}
+
+.comment-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 988px) {
+  .comment-container {
+    width: 80%;
+    margin: 10px auto;
+  }
+}
