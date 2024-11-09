@@ -46,3 +46,89 @@
 </ul>
 
 <p>With this secure and scalable authentication system, users can have peace of mind knowing that their data is protected while enjoying a seamless, long-lasting session experience.</p>
+<h2>Blog API Documentation</h2>
+
+<p>This API allows users to interact with a blog platform by providing routes for authentication, user management, post management, and comments. The system uses <strong>JWT-based authentication</strong> with <strong>HttpOnly cookies</strong> to ensure high security against <strong>XSS</strong> and <strong>CSRF attacks</strong>.</p>
+
+<h3>Authentication Routes</h3>
+<p><strong>File:</strong> <code>authRoute.js</code></p>
+<ul>
+  <li><code>POST /api/register</code> - Register a new user.</li>
+  <li><code>POST /api/login</code> - Authenticate a user and issue JWT tokens.</li>
+  <li><code>POST /api/logout</code> - Log out the user by clearing cookies.</li>
+  <li><code>POST /api/refreshtoken</code> - Refresh the access token using a refresh token.</li>
+  <li><code>GET /api/auth/verify</code> - Verify the JWT token and provide user information if authenticated.</li>
+</ul>
+
+<h4>Security</h4>
+<p>All authentication routes use <strong>JWTs stored in HttpOnly cookies</strong> for enhanced security. This prevents the tokens from being accessible to JavaScript, reducing the risk of token theft through XSS attacks.</p>
+
+<hr>
+
+<h3>User Routes</h3>
+<p><strong>File:</strong> <code>userRoute.js</code></p>
+<ul>
+  <li><code>PUT /api/user/profile/:id</code> - Update a user’s profile information.</li>
+  <li><code>GET /api/user/profile/:id</code> - Retrieve information for a specific user profile.</li>
+  <li><code>GET /api/user/profile</code> - Get a list of all user profiles (Admin access only).</li>
+  <li><code>POST /api/user/profile/upload-photo</code> - Upload a user’s profile photo.</li>
+</ul>
+
+<h4>Security</h4>
+<p>Each user route is protected with <strong>role-based access control</strong> to restrict certain actions based on user roles. Admins have additional permissions to access or modify all user profiles, whereas regular users can only access and update their own profiles.</p>
+
+<hr>
+
+<h3>Post Routes</h3>
+<p><strong>File:</strong> <code>postRoute.js</code></p>
+<ul>
+  <li><code>GET /api/post/</code> - Retrieve a list of posts.</li>
+  <li><code>GET /api/post/:id</code> - Retrieve details for a specific post.</li>
+  <li><code>GET /api/post/count</code> - Get the total count of posts.</li>
+  <li><code>DELETE /api/post/:id</code> - Delete a post.</li>
+  <li><code>PUT /api/post/:id</code> - Update a post.</li>
+  <li><code>PUT /api/post/like/:id</code> - Toggle like on a post.</li>
+  <li><code>PUT /api/post/image/:id</code> - Update the image associated with a post.</li>
+  <li><code>POST /api/post/</code> - Create a new post with an optional image.</li>
+</ul>
+
+<h4>Security</h4>
+<p>All post-related routes are protected by <strong>JWT authentication</strong>. Only authenticated users can create, like, update, or delete posts. Each action is verified through token validation, ensuring that only authorized users can access or modify posts.</p>
+
+<hr>
+
+<h3>Comment Routes</h3>
+<p><strong>File:</strong> <code>commentRoute.js</code></p>
+<ul>
+  <li><code>POST /api/comment/</code> - Create a new comment on a post.</li>
+  <li><code>GET /api/comment/</code> - Retrieve all comments (Admin access only).</li>
+</ul>
+
+<h4>Security</h4>
+<p>Comments are protected by <strong>JWT authentication</strong>. Only authenticated users can post comments, and only admins can retrieve all comments.</p>
+
+<hr>
+
+<h3>Middleware</h3>
+<p>This API includes several middleware functions to enhance security, ensure data integrity, and manage error handling:</p>
+<ul>
+  <li><code>helmet</code> - Adds security headers to responses.</li>
+  <li><code>cors</code> - Configured to allow requests from the specified frontend URL.</li>
+  <li><code>express.json</code> - Parses incoming JSON payloads.</li>
+  <li><code>xss</code> - Prevents XSS attacks by sanitizing input data.</li>
+  <li><code>cookieParser</code> - Parses cookies from incoming requests.</li>
+</ul>
+
+<h3>Error Handling</h3>
+<p>The API has custom error-handling middleware to handle different errors effectively:</p>
+<ul>
+  <li><code>errorNotFoundHandler</code> - Returns a 404 error for any unknown route.</li>
+  <li><code>errorHandler</code> - Manages all other server errors, sending appropriate HTTP status codes and messages.</li>
+</ul>
+
+<h3>How to Start the API</h3>
+<p>To start the API, simply run the following command:</p>
+<pre><code>node index.js</code></pre>
+<p>The server will be running on <strong>localhost:4000</strong>.</p>
+<p>Make sure to set up the required <strong>MongoDB connection string</strong> and <strong>JWT_SECRET</strong> in your <code>.env</code> file.</p>
+
