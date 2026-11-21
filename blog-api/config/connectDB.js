@@ -1,6 +1,8 @@
 // Import Mongoose for MongoDB interactions
 const mongoose = require("mongoose");
 
+require("dotenv").config();
+
 // Function to connect to MongoDB
 const connectDB = () => {
   try {
@@ -9,7 +11,7 @@ const connectDB = () => {
 
     // Connect to the MongoDB database
     mongoose
-      .connect("mongodb://localhost:27017/blogdb")
+      .connect(process.env.DATABASE_URL)
       .then(() => console.log("Database connected...")) // Log success message if connected
       .catch((err) => console.error("Database connection failed:", err)); // Handle connection errors
   } catch (err) {

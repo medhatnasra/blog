@@ -3,15 +3,18 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { authActions } from "../slices/authSlice";
 
+// Optional: Create an axios instance so you don't repeat withCredentials: true
+const api = axios.create({
+  baseURL: "/api",
+  withCredentials: true,
+});
+
 export function registerRequest(user, navigate) {
   return async (dispatch) => {
     try {
-      const result = await axios.post(
-        "http://localhost:4000/api/register",
-        user
-      );
+      const result = await api.post("/register", user);
       if (result.status === 201) {
-        toast.success("User Registred successfully");
+        toast.success("User Registered successfully");
         navigate("/login");
       }
     } catch (err) {
@@ -19,13 +22,10 @@ export function registerRequest(user, navigate) {
     }
   };
 }
+
 export function logoutRequest() {
   return async (dispatch) => {
-    await axios.post(
-      "http://localhost:4000/api/logout",
-      {},
-      { withCredentials: true }
-    );
+    await api.post("/logout", {});
     localStorage.removeItem("XNDUDUD");
     localStorage.removeItem("XDUDUD");
     window.location.reload();
@@ -35,9 +35,7 @@ export function logoutRequest() {
 export function loginRequest(user, navigate) {
   return async (dispatch) => {
     try {
-      const result = await axios.post("http://localhost:4000/api/login", user, {
-        withCredentials: true,
-      });
+      const result = await api.post("/login", user);
 
       if (result.status === 200) {
         dispatch(authActions.LoginSuccess(result.data?.user));
@@ -55,12 +53,10 @@ export function loginRequest(user, navigate) {
 export function postRequest() {
   return async (dispatch) => {
     try {
-      const result = await axios.get("http://localhost:4000/api/post/", {
-        withCredentials: true,
-      });
+      const result = await api.get("/post/");
       dispatch(authActions.postsFetch(result.data));
     } catch (err) {
-      if (!err.response?.data?.message === "Invalid Token") {
+      if (err.response?.data?.message !== "Invalid Token") {
         return toast.error(err.response?.data?.message);
       }
     }
@@ -70,15 +66,10 @@ export function postRequest() {
 export function userProfileRequest(id) {
   return async (dispatch) => {
     try {
-      const result = await axios.get(
-        `http://localhost:4000/api/user/profile/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const result = await api.get(`/user/profile/${id}`);
       dispatch(authActions.profilesucess(result.data));
     } catch (err) {
-      if (!err.response?.data?.message === "Invalid Token") {
+      if (err.response?.data?.message !== "Invalid Token") {
         return toast.error(err.response?.data?.message);
       }
     }
@@ -88,12 +79,10 @@ export function userProfileRequest(id) {
 export function postDetailsRequest(id) {
   return async (dispatch) => {
     try {
-      const result = await axios.get(`http://localhost:4000/api/post/${id}`, {
-        withCredentials: true,
-      });
+      const result = await api.get(`/post/${id}`);
       dispatch(authActions.postdetailfetch(result.data));
     } catch (err) {
-      if (!err.response?.data?.message === "Invalid Token") {
+      if (err.response?.data?.message !== "Invalid Token") {
         return toast.error(err.response?.data?.message);
       }
     }
@@ -103,18 +92,13 @@ export function postDetailsRequest(id) {
 export function createPostRequest(formData) {
   return async () => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/post/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
+      await api.post("/post/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (err) {
-      if (!err.response?.data?.message === "Invalid Token") {
+      if (err.response?.data?.message !== "Invalid Token") {
         return toast.error(err.response?.data?.message);
       }
     }

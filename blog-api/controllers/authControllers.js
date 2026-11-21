@@ -2,7 +2,7 @@ const Joi = require("joi"); // Validation library
 const { UserModel } = require("../models/User"); // User schema/model
 var jwt = require("jsonwebtoken"); // JSON Web Token for auth
 var bcrypt = require("bcryptjs"); // Library for password hashing
-
+require("dotenv").config();
 /**---------------------------------
 * @desc Register a New User in the System
 * @route /api/user/
@@ -61,7 +61,7 @@ const LoginController = async (req, res) => {
     // Compare provided password with stored hash
     const isPasswordMatch = await bcrypt.compare(
       req.body.password,
-      result.password
+      result.password,
     );
 
     if (!isPasswordMatch) {
@@ -71,14 +71,14 @@ const LoginController = async (req, res) => {
     // Generate access and refresh tokens
     const accessToken = jwt.sign(
       { id: result._id, isAdmin: result.isAdmin },
-      process.env.JWT_SECRET,
-      { expiresIn: "15m" } // Access token expires in 15 minutes
+      process.env.SECRET_KEY,
+      { expiresIn: "15m" }, // Access token expires in 15 minutes
     );
 
     const refreshToken = jwt.sign(
       { id: result._id, isAdmin: result.isAdmin },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" } // Refresh token expires in 7 days
+      process.env.SECRET_KEY,
+      { expiresIn: "7d" }, // Refresh token expires in 7 days
     );
 
     // Set access and refresh tokens in HTTP-only cookies for security
@@ -177,7 +177,7 @@ const verifyRefrechtoken = (req, res) => {
     const newAccessToken = jwt.sign(
       { id: decoded.id, isAdmin: decoded.isAdmin },
       process.env.JWT_SECRET,
-      { expiresIn: "15m" } // New access token with 15-minute expiration
+      { expiresIn: "15m" }, // New access token with 15-minute expiration
     );
 
     // Set the new access token as an HTTP-only cookie

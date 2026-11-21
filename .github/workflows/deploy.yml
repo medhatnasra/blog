@@ -1,0 +1,46 @@
+name: test-flows-pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog-api
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-api/package-lock.json
+      - run: npm ci
+  test-front:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog-front
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-front/package-lock.json
+      - run: npm ci
+      - run: npm run build
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [test-api, test-front]
+    steps:
+      - uses: actions/checkout@v4
+      - run: touch blog-api/.env
+      - run: docker compose build

@@ -1,0 +1,16 @@
+services:
+  api:
+    build: ./blog-api
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./blog-api/.env
+    restart: unless-stopped
+
+  frontend:
+    build: ./blog-front
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: unless-stopped
