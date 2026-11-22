@@ -17,7 +17,6 @@ router.post("/refreshtoken", verifyRefrechtoken);
 router.post("/login", LoginController);
 router.get("/auth/verify", (req, res) => {
   const token = req.cookies.accessToken;
-  console.log("hzyy");
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
